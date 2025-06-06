@@ -1,11 +1,15 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Feather from 'react-native-vector-icons/Feather'; // Импортируем Feather иконки
+import { Feather } from '@expo/vector-icons';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'NextLessonScreen1'>;
 
 export default function NextLessonScreen1() {
-  const navigation = useNavigation();
-  
+  const navigation = useNavigation<NavigationProp>();
+
   return (
     <View style={styles.container}>
       <View style={styles.lessonBox}>
@@ -17,8 +21,7 @@ export default function NextLessonScreen1() {
       <View style={styles.textBox}>
         <View style={styles.textBox2}>
           <Text style={styles.text1}>
-            КТО ТАКИЕ МОШЕННИКИ{'\n'}
-            И КАК ОНИ РАБОТАЮТ?
+            КТО ТАКИЕ МОШЕННИКИ{'\n'}И КАК ОНИ РАБОТАЮТ?
           </Text>
         </View>
 
@@ -99,8 +102,8 @@ const styles = StyleSheet.create({
     padding: 25,
     borderRadius: 35,
     marginTop: 10,
-    paddingHorizontal: 60, 
-    paddingVertical: 20, 
+    paddingHorizontal: 60,
+    paddingVertical: 20,
     alignItems: 'center',
     justifyContent: 'center',
   },

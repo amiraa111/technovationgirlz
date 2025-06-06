@@ -1,27 +1,43 @@
 import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Animated, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+  Animated,
+  Dimensions,
+} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window');
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
+type RootStackParamList = {
+  LessonScreen: undefined;
+  Lesson2Screen: undefined;
+};
+
 export default function HomeScreen() {
-  const steps = [1, 2, 3, 4, 5];
+  const steps: number[] = [1, 2, 3, 4, 5];
   const animatedValues = steps.map(() => new Animated.Value(0));
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   useEffect(() => {
-    Animated.stagger(300, animatedValues.map(anim =>
-      Animated.timing(anim, {
-        toValue: 1,
-        duration: 600,
-        useNativeDriver: true,
-      })
-    )).start();
+    Animated.stagger(
+      300,
+      animatedValues.map((anim) =>
+        Animated.timing(anim, {
+          toValue: 1,
+          duration: 600,
+          useNativeDriver: true,
+        })
+      )
+    ).start();
   }, []);
 
-  const positions = [
+  const positions: { x: number; y: number }[] = [
     { x: 100, y: 150 },
     { x: width - 100, y: 150 },
     { x: 100, y: 350 },
@@ -46,9 +62,13 @@ export default function HomeScreen() {
 
       {/* Панель заголовка */}
       <View style={styles.headerBar}>
-        <TouchableOpacity><Text style={styles.arrow}>{"<"}</Text></TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.arrow}>{'<'}</Text>
+        </TouchableOpacity>
         <Text style={styles.headerText}>Обучение</Text>
-        <TouchableOpacity><Text style={styles.arrow}>{">"}</Text></TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.arrow}>{'>'}</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Лестница обучения */}
@@ -58,9 +78,33 @@ export default function HomeScreen() {
           const startY = positions[index].y;
           return (
             <View key={index}>
-              <View style={[styles.stepRow, { justifyContent: index % 2 === 0 ? 'flex-start' : 'flex-end' }]} >
-                <Animated.View style={[styles.step, { opacity: animatedValues[index], transform: [{ scale: animatedValues[index] }] }]}>
-                  <TouchableOpacity onPress={() => navigation.navigate('LessonScreen')}>
+              <View
+                style={[
+                  styles.stepRow,
+                  {
+                    justifyContent:
+                      index % 2 === 0 ? 'flex-start' : 'flex-end',
+                  },
+                ]}
+              >
+                <Animated.View
+                  style={[
+                    styles.step,
+                    {
+                      opacity: animatedValues[index],
+                      transform: [{ scale: animatedValues[index] }],
+                    },
+                  ]}
+                >
+                  <TouchableOpacity
+                    onPress={() => {
+                      if (index < 1) {
+                        navigation.navigate('LessonScreen');
+                      } else {
+                        navigation.navigate('Lesson2Screen');
+                      }
+                    }}
+                  >
                     <Text style={styles.stepText}>{step}</Text>
                   </TouchableOpacity>
                 </Animated.View>
@@ -71,10 +115,12 @@ export default function HomeScreen() {
                 <Svg height="200" width={width} style={styles.line}>
                   <AnimatedPath
                     d={`M${startX},${startY} 
-                        C${(startX + positions[index + 1].x) / 2},${startY + 50} 
-                        ${(startX + positions[index + 1].x) / 2},${positions[index + 1].y - 50} 
-                        ${positions[index + 1].x},${positions[index + 1].y}`}
-                    stroke="#e65100"  // Цвет линии оранжевый
+                      C${(startX + positions[index + 1].x) / 2},${startY + 50} 
+                      ${(startX + positions[index + 1].x) / 2},${
+                      positions[index + 1].y - 50
+                    } 
+                      ${positions[index + 1].x},${positions[index + 1].y}`}
+                    stroke="#e65100"
                     strokeWidth="5"
                     fill="none"
                     opacity={animatedValues[index]}
@@ -120,7 +166,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e65100',
     marginHorizontal: 10,
     borderRadius: 30,
-    paddingVertical:15,
+    paddingVertical: 15,
     paddingHorizontal: 40,
     marginBottom: 10,
   },
@@ -158,5 +204,5 @@ const styles = StyleSheet.create({
   line: {
     position: 'absolute',
     top: 300,
-  }
+  },
 });
