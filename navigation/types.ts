@@ -1,31 +1,37 @@
-// src/navigation/types.ts
-
 export type RootStackParamList = {
+  // Главный экран и инструкции
   HomeScreen: undefined;
   InstructionScreen: undefined;
-  LessonScreen: { lessonId: number };
-  Lesson2Screen: { lessonId: number };
-  NextLessonScreen1: { step: number };
-  NextLessonScreen2: { step: number };
-  NextLessonScreen3: { step: number };
-  NextLessonScreen4: { step: number };
-  NextLessonScreen5: { step: number };
-  NextLessonScreen6: { step: number };
-  NextLessonScreen7: { step: number };
-  NextLessonScreen8: { step: number };
-  NextLessonScreen9: { step: number };
-  NextLessonScreen10: { step: number };
-  NextLessonScreen11: { step: number };
-  NextLesson2Screen1: { step: number };
-  NextLesson2Screen2: { step: number };
-  NextLesson2Screen3: { step: number };
-  NextLesson2Screen4: { step: number };
-  NextLesson2Screen5: { step: number };
-  NextLesson2Screen6: { step: number };
-  NextLesson2Screen7: { step: number };
-  NextLesson2Screen8: { step: number };
-  NextLesson2Screen9: { step: number };
-  NextLesson2Screen10: { step: number };
-  NextLesson2Screen11: { step: number };
+
+  // Урок 1
+  LessonScreen: undefined;
+  NextLessonScreen1: undefined;
+  NextLessonScreen2: undefined;
+  NextLessonScreen3: undefined;
+  NextLessonScreen4: undefined;
+  NextLessonScreen5: undefined;
+  NextLessonScreen6: undefined;
+  NextLessonScreen7: undefined;
+  NextLessonScreen8: undefined;
+  NextLessonScreen9: undefined;
+  NextLessonScreen10: undefined;
+  NextLessonScreen11: undefined;
+
+  // Урок 2
+  Lesson2Screen: undefined;
+  NextLesson2Screen1: undefined;
+  NextLesson2Screen2: undefined;
+  NextLesson2Screen3: undefined;
+  NextLesson2Screen4: undefined;
+  NextLesson2Screen5: undefined;
+  NextLesson2Screen6: undefined;
+  NextLesson2Screen7: undefined;
+  NextLesson2Screen8: undefined;
+  NextLesson2Screen9: undefined;
+  NextLesson2Screen10: undefined;
+  NextLesson2Screen11: undefined;
+
+  // Прочие экраны
   TestImage: undefined;
 };
+

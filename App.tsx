@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { RootStackParamList } from './navigation/types';
 
 // Импорт экранов
 import HomeScreen from './screens/HomeScreen';
 import InstructionScreen from './screens/InstructionScreen';
-
 import LessonScreen from './screens/LessonScreen';
+import Lesson2Screen from './screens/Lesson2Screen';
 import NextLessonScreen1 from './screens/NextLessonScreen1';
 import NextLessonScreen2 from './screens/NextLessonScreen2';
 import NextLessonScreen3 from './screens/NextLessonScreen3';
@@ -18,8 +19,6 @@ import NextLessonScreen8 from './screens/NextLessonScreen8';
 import NextLessonScreen9 from './screens/NextLessonScreen9';
 import NextLessonScreen10 from './screens/NextLessonScreen10';
 import NextLessonScreen11 from './screens/NextLessonScreen11';
-
-import Lesson2Screen from './screens/Lesson2Screen';
 import NextLesson2Screen1 from './screens/NextLesson2Screen1';
 import NextLesson2Screen2 from './screens/NextLesson2Screen2';
 import NextLesson2Screen3 from './screens/NextLesson2Screen3';
@@ -32,41 +31,16 @@ import NextLesson2Screen9 from './screens/NextLesson2Screen9';
 import NextLesson2Screen10 from './screens/NextLesson2Screen10';
 import NextLesson2Screen11 from './screens/NextLesson2Screen11';
 
-export type RootStackParamList = {
-  Home: undefined;
-  Instruction: undefined;
-  Lesson1: undefined;
-  NextLesson1Step1: undefined;
-  NextLesson1Step2: undefined;
-  NextLesson1Step3: undefined;
-  NextLesson1Step4: undefined;
-  NextLesson1Step5: undefined;
-  NextLesson1Step6: undefined;
-  NextLesson1Step7: undefined;
-  NextLesson1Step8: undefined;
-  NextLesson1Step9: undefined;
-  NextLesson1Step10: undefined;
-  NextLesson1Step11: undefined;
-  Lesson2: undefined;
-  NextLesson2Step1: undefined;
-  NextLesson2Step2: undefined;
-  NextLesson2Step3: undefined;
-  NextLesson2Step4: undefined;
-  NextLesson2Step5: undefined;
-  NextLesson2Step6: undefined;
-  NextLesson2Step7: undefined;
-  NextLesson2Step8: undefined;
-  NextLesson2Step9: undefined;
-  NextLesson2Step10: undefined;
-  NextLesson2Step11: undefined;
-};
-
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomeScreen" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        id={undefined} // ✅ 👈 ДОБАВЛЕНО ЭТО — чтобы убрать ошибку
+        initialRouteName="HomeScreen"
+        screenOptions={{ headerShown: false }}
+      >
         {/* Главный экран и инструкции */}
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="InstructionScreen" component={InstructionScreen} />
@@ -102,4 +76,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
